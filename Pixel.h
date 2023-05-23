@@ -17,18 +17,18 @@ typedef struct CellOfPixels {
 } CellOfPixels;
 
 void addCellOfPixelInArray(CellOfPixels **Array, Pixel *pixel);
-Pixel *create_pixel(int px, int py);
-void delete_pixel(Pixel * pixel);
-void pixel_line(Line *line, CellOfPixels **pixels);
-void pixel_point(Point *point, CellOfPixels **pixels);
-void pixel_circle(Circle * circle, CellOfPixels** pixels);
-void pixel_square(Square * square, CellOfPixels** pixels);
-void pixel_rectangle(Rectangle * rectangle, CellOfPixels ** pixels);
-void pixel_polygon(Polygon * polygon, CellOfPixels **pixels);
-CellOfPixels *create_shape_to_pixel(Shape* shape);
-void delete_pixel_shape(CellOfPixels *pixels);
+Pixel *createPixel(int px, int py);
+void deletePixel(Pixel * pixel);
+void pixelLine(Line *line, CellOfPixels **pixels);
+void pixelPoint(Point *point, CellOfPixels **pixels);
+void pixelCircle(Circle * circle, CellOfPixels** pixels);
+void pixelSquare(Square * square, CellOfPixels** pixels);
+void pixelRectangle(Rectangle * rectangle, CellOfPixels ** pixels);
+void pixelPolygon(Polygon * polygon, CellOfPixels **pixels);
+CellOfPixels *createShapeToPixel(Shape* shape);
+void deletePixelShape(CellOfPixels *pixels);
 int lenOfLLCPixels(CellOfPixels* pixels);
-void addLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix);
+void addLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix, unsigned int width, unsigned int height);
 void removeLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix);
 
 

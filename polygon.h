@@ -14,8 +14,8 @@ typedef struct{
 }Polygon;
 
 
-Polygon *create_polygon(unsigned int n);
-void delete_polygon(Polygon * polygon);
-void print_polygon(Polygon * polygon);
+Polygon *createPolygon(unsigned int n);
+void deletePolygon(Polygon * polygon);
+void printPolygon(Polygon * polygon);
 
 #endif //VECT_POLYGON_H

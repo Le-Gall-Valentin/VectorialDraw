@@ -18,7 +18,6 @@ typedef struct {
 
 unsigned int countStringArrayElements(const char *array, const char *delimiter);
 StringArray splitStringToArray(const char *stringToSplit, const char *delimiter);
-void deleteString(char* string);
 int isDigit(char* string);
 int convertStringToDigit(char* string);
 

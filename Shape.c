@@ -4,11 +4,13 @@
 
 #include "Shape.h"
 
+// Fonction interne pour obtenir un nouvel identifiant unique pour une forme
 unsigned int getNewFormId(){
     static unsigned int id = 0;
     return ++id;
 }
 
+// Crée et initialise une instance de la structure Shape avec le type et le formulaire réel spécifiés
 Shape *createForm(typeOfCommand type, void* RealForm){
     Shape* form = (Shape*) malloc(sizeof(Shape));
     form->id = getNewFormId();
@@ -17,25 +19,26 @@ Shape *createForm(typeOfCommand type, void* RealForm){
     return form;
 }
 
+// Affiche les informations d'une forme sur la console
 void printForm(Shape* form){
     switch (form->type) {
         case cmdPoint:{
-            print_point((Point*) (form->realForm));
+            printPoint((Point *) (form->realForm));
             break;
         }case cmdLine:{
-            print_line((Line*) (form->realForm));
+            printLine((Line *) (form->realForm));
             break;
         }case cmdCircle:{
-            print_circle((Circle*) (form->realForm));
+            printCircle((Circle *) (form->realForm));
             break;
         }case cmdSquare:{
-            print_square((Square*) (form->realForm));
+            printSquare((Square *) (form->realForm));
             break;
         }case cmdRectangle:{
-            print_rectangle((Rectangle*) (form->realForm));
+            printRectangle((Rectangle *) (form->realForm));
             break;
         }case cmdPolygon: {
-            print_polygon((Polygon*) (form->realForm));
+            printPolygon((Polygon *) (form->realForm));
             break;
         }
         default:
@@ -45,39 +48,47 @@ void printForm(Shape* form){
     printf("\n");
 }
 
+// Crée un objet Point à partir d'une commande spécifiée
 void* createFormPoint(StringArray command){
-    return create_point(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
+    return createPoint(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
 }
 
+// Crée un objet Line à partir d'une commande spécifiée
 void* createFormLine(StringArray command){
-    Point *point1 = create_point(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
-    Point *point2 = create_point(convertStringToDigit(command.array[3]), convertStringToDigit(command.array[4]));
-    return create_line(point1, point2);
+    Point *point1 = createPoint(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
+    Point *point2 = createPoint(convertStringToDigit(command.array[3]), convertStringToDigit(command.array[4]));
+    return createLine(point1, point2);
 }
 
+// Crée un objet Circle à partir d'une commande spécifiée
 void* createFormCircle(StringArray command){
-    Point *radius = create_point(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
-    return create_circle(radius, convertStringToDigit(command.array[3]));
+    Point *radius = createPoint(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
+    return createCircle(radius, convertStringToDigit(command.array[3]));
 }
 
+// Crée un objet Rectangle à partir d'une commande spécifiée
 void* createFormRectangle(StringArray command){
-    Point *point = create_point(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
-    return create_rectangle(point, convertStringToDigit(command.array[3]), convertStringToDigit(command.array[4]));
+    Point *point = createPoint(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
+    return createRectangle(point, convertStringToDigit(command.array[3]), convertStringToDigit(command.array[4]));
 }
 
+// Crée un objet Square à partir d'une commande spécifiée
 void* createFormSquare(StringArray command){
-    Point *point = create_point(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
-    return create_square(point, convertStringToDigit(command.array[3]));
+    Point *point = createPoint(convertStringToDigit(command.array[1]), convertStringToDigit(command.array[2]));
+    return createSquare(point, convertStringToDigit(command.array[3]));
 }
 
+// Crée un objet Polygon à partir d'une commande spécifiée
 void* createFormPolygon(StringArray command){
-    Polygon *polygon = create_polygon((command.size-1)/2);
+    Polygon *polygon = createPolygon((command.size - 1) / 2);
     for (int i = 1; i < command.size; i+=2) {
-        (polygon->points)[(i-1)/2] = create_point(convertStringToDigit(command.array[i]), convertStringToDigit(command.array[i+1]));
+        (polygon->points)[(i-1)/2] = createPoint(convertStringToDigit(command.array[i]),
+                                                 convertStringToDigit(command.array[i + 1]));
     }
     return polygon;
 }
 
+// Crée un objet Shape en fonction de la commande spécifiée
 void* createFormWithHerStruct(StringArray command){
     switch (returnTypeOfCommand(command.array[0])) {
         case cmdPoint:{
@@ -103,26 +114,27 @@ void* createFormWithHerStruct(StringArray command){
     }
 }
 
+// Supprime un objet Shape et libère la mémoire associée
 void deleteForm(Shape* form){
     if (form != NULL) {
         switch (form->type) {
             case cmdPoint:
-                delete_point((Point *) (form->realForm));
+                deletePoint((Point *) (form->realForm));
                 break;
             case cmdRectangle:
-                delete_rectangle((Rectangle *) (form->realForm));
+                deleteRectangle((Rectangle *) (form->realForm));
                 break;
             case cmdCircle:
-                delete_circle((Circle *) (form->realForm));
+                deleteCircle((Circle *) (form->realForm));
                 break;
             case cmdSquare:
-                delete_square((Square *) (form->realForm));
+                deleteSquare((Square *) (form->realForm));
                 break;
             case cmdLine:
-                delete_line((Line *) (form->realForm));
+                deleteLine((Line *) (form->realForm));
                 break;
             case cmdPolygon:
-                delete_polygon((Polygon *) (form->realForm));
+                deletePolygon((Polygon *) (form->realForm));
                 break;
             default:
                 break;
@@ -130,4 +142,5 @@ void deleteForm(Shape* form){
     }
     free(form);
 }
+
 

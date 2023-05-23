@@ -15,15 +15,14 @@ typedef struct{
     int nbForms;
 }Area;
 
-Area* create_area(unsigned int width, unsigned int height);
-int** create_matrix(unsigned int width, unsigned int height);
-void add_shape_to_area(Area** area, Shape* shape);
-void clear_area(Area* area);
+Area* createArea(unsigned int width, unsigned int height);
+int** createMatrix(unsigned int width, unsigned int height);
+void addShapeToArea(Area** area, Shape* shape);
+void clearArea(Area* area);
 void deleteMatrixOfArea(Area* area);
-void erase_area(Area* area);
-void delete_area(Area* area);
-void draw_area(Area* area);
-void print_area(Area* area);
+void eraseArea(Area* area);
+void deleteArea(Area* area);
+void printArea(Area* area);
 void deleteFormInAreaMatrix(Area** area, CellOfForms* form);
 
 #endif //DESSIN6_AREA_H
