@@ -5,10 +5,17 @@
 #include "control.h"
 
 void delete(unsigned int id, Area* area) {
+    // Recherche de la forme avec l'ID spécifié dans la liste des formes de l'aire
     CellOfForms *cell = getShapeById(id, area->forms);
+
     if (cell != NULL) {
+        // Suppression de la forme de la matrice de l'aire
         deleteFormInAreaMatrix(&area, cell);
+
+        // Suppression de la forme elle-même
         deleteForm(cell->value);
+
+        // Suppression de la cellule de la liste des formes de l'aire
         deleteCellOfForms(&area->forms, cell);
     }
 }
@@ -24,6 +31,7 @@ void list(CellOfForms *forms) {
     } else {
         CellOfForms *temporaryArray = forms;
         while (temporaryArray != NULL) {
+            // Affichage de chaque forme dans la liste
             printForm(temporaryArray->value);
             temporaryArray = temporaryArray->next;
         }
@@ -41,7 +49,6 @@ void help() {
     printf("exit \n");
 }
 
-
 void executeControl(StringArray command, Area *area, int *end) {
     switch (returnTypeOfCommand(command.array[0])) {
         case cmdDelete: {
@@ -49,7 +56,7 @@ void executeControl(StringArray command, Area *area, int *end) {
             break;
         }
         case cmdErase: {
-            clear_area(area);
+            clearArea(area);
             break;
         }
         case cmdHelp: {
@@ -61,7 +68,7 @@ void executeControl(StringArray command, Area *area, int *end) {
             break;
         }
         case cmdPlot: {
-            print_area(area);
+            printArea(area);
             break;
         }
         case cmdClear: {
@@ -76,5 +83,6 @@ void executeControl(StringArray command, Area *area, int *end) {
             break;
     }
 }
+
 
 

@@ -13,5 +13,6 @@ typedef struct CellOfForms{
 
 void addCellOfFormsInArray(CellOfForms **Array, Shape *form);
 void deleteCellOfForms(CellOfForms **array, CellOfForms *cell);
+void deleteAllCells(CellOfForms **array);
 
 #endif //DESSIN6_CELLOFFORMS_H

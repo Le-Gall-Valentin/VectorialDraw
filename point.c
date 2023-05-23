@@ -3,17 +3,23 @@
 //
 #include "point.h"
 
-Point *create_point(int x, int y)
+// Crée et initialise une instance de la structure Point avec les coordonnées spécifiées
+Point *createPoint(int x, int y)
 {
+    // Allouer de la mémoire pour la structure Point
     Point *point = (Point*)malloc(sizeof(Point));
     point->x = x;
     point->y = y;
     return point;
 }
-void delete_point(Point *point){
+
+// Libère la mémoire allouée pour un objet Point
+void deletePoint(Point *point){
     free(point);
     point = NULL;
 }
-void print_point(Point *p){
+
+// Affiche les coordonnées d'un point sur la console
+void printPoint(Point *p){
     printf("(Points) point : (%d, %d)", p->x, p->y);
 }

@@ -4,22 +4,26 @@
 
 #include "Pixel.h"
 
-Pixel *create_pixel(int px, int py) {
+Pixel *createPixel(int px, int py) {
+    // Crée un nouveau pixel avec les coordonnées spécifiées
     Pixel *pixel = (Pixel *) malloc(sizeof(Pixel));
     pixel->x = px;
     pixel->y = py;
     return pixel;
 }
 
-void delete_pixel(Pixel *pixel) {
+void deletePixel(Pixel *pixel) {
+    // Libère la mémoire allouée pour un pixel
     free(pixel);
 }
 
-void pixel_point(Point *point, CellOfPixels **pixels) {
-    addCellOfPixelInArray(pixels, create_pixel(point->x, point->y));
+void pixelPoint(Point *point, CellOfPixels **pixels) {
+    // Convertit un point en pixel et l'ajoute à un tableau de pixels
+    addCellOfPixelInArray(pixels, createPixel(point->x, point->y));
 }
 
-void pixel_line(Line *line, CellOfPixels **pixels){
+void pixelLine(Line *line, CellOfPixels **pixels){
+    // Convertit une ligne en pixels et les ajoute à un tableau de pixels
     Point point2 = *(line->point2);
     Point point1 = *(line->point1);
     int dx = abs(point2.x - point1.x);
@@ -37,7 +41,7 @@ void pixel_line(Line *line, CellOfPixels **pixels){
     }
     int err = dx - dy;
     while (point1.x != point2.x || point1.y != point2.y) {
-        Pixel *p = create_pixel(point1.x, point1.y);
+        Pixel *p = createPixel(point1.x, point1.y);
         addCellOfPixelInArray(pixels, p);
         int e2 = 2 * err;
         if (e2 > -dy) {
@@ -49,25 +53,26 @@ void pixel_line(Line *line, CellOfPixels **pixels){
             point1.y = point1.y + sy;
         }
     }
-    Pixel *p = create_pixel(point2.x, point2.y);
+    Pixel *p = createPixel(point2.x, point2.y);
     addCellOfPixelInArray(pixels, p);
 }
 
-void pixel_circle(Circle *circle, CellOfPixels **pixels) {
+void pixelCircle(Circle *circle, CellOfPixels **pixels) {
+    // Convertit un cercle en pixels et les ajoute à un tableau de pixels
     Point center = *(circle->center);
     int radius = (circle->radius);
     int x = 0;
     int y = radius;
     int delta = radius - 1;
     while (y >= x) {
-        addCellOfPixelInArray(pixels, create_pixel(center.x + x, center.y + y));
-        addCellOfPixelInArray(pixels,create_pixel(center.x + y, center.y + x));
-        addCellOfPixelInArray(pixels,create_pixel(center.x - x, center.y + y));
-        addCellOfPixelInArray(pixels,create_pixel(center.x - y, center.y + x));
-        addCellOfPixelInArray(pixels,create_pixel(center.x + x, center.y - y));
-        addCellOfPixelInArray(pixels,create_pixel(center.x + y, center.y - x));
-        addCellOfPixelInArray(pixels,create_pixel(center.x - x, center.y - y));
-        addCellOfPixelInArray(pixels,create_pixel(center.x - y, center.y - x));
+        addCellOfPixelInArray(pixels, createPixel(center.x + x, center.y + y));
+        addCellOfPixelInArray(pixels, createPixel(center.x + y, center.y + x));
+        addCellOfPixelInArray(pixels, createPixel(center.x - x, center.y + y));
+        addCellOfPixelInArray(pixels, createPixel(center.x - y, center.y + x));
+        addCellOfPixelInArray(pixels, createPixel(center.x + x, center.y - y));
+        addCellOfPixelInArray(pixels, createPixel(center.x + y, center.y - x));
+        addCellOfPixelInArray(pixels, createPixel(center.x - x, center.y - y));
+        addCellOfPixelInArray(pixels, createPixel(center.x - y, center.y - x));
         if (delta >= (2 * x)) {
             delta -= (2 * x) + 1;
             x++;
@@ -82,68 +87,81 @@ void pixel_circle(Circle *circle, CellOfPixels **pixels) {
     }
 }
 
-void pixel_square(Square *square, CellOfPixels **pixels) {
+
+void pixelSquare(Square *square, CellOfPixels **pixels) {
+    // Convertit un carré en pixels et les ajoute à un tableau de pixels
     for (int i = 0; i < square->length; ++i) {
-        addCellOfPixelInArray(pixels,create_pixel(square->point->x, (square->point->y) + i));
-        addCellOfPixelInArray(pixels,create_pixel((square->point->x) + (square->length) - 1, (square->point->y) + i));
-        addCellOfPixelInArray(pixels,create_pixel((square->point->x) + i, (square->point->y) + (square->length) - 1));
-        addCellOfPixelInArray(pixels,create_pixel((square->point->x) + i, square->point->y));
+        addCellOfPixelInArray(pixels, createPixel(square->point->x, (square->point->y) + i));
+        addCellOfPixelInArray(pixels, createPixel((square->point->x) + (square->length) - 1, (square->point->y) + i));
+        addCellOfPixelInArray(pixels, createPixel((square->point->x) + i, (square->point->y) + (square->length) - 1));
+        addCellOfPixelInArray(pixels, createPixel((square->point->x) + i, square->point->y));
     }
 }
 
-void pixel_rectangle(Rectangle *rectangle, CellOfPixels **pixels) {
+void pixelRectangle(Rectangle *rectangle, CellOfPixels **pixels) {
+    // Convertit un rectangle en pixels et les ajoute à un tableau de pixels
     for (int i = 0; i < rectangle->width; ++i) {
-        addCellOfPixelInArray(pixels, create_pixel(rectangle->point->x, (rectangle->point->y) + i));
-        addCellOfPixelInArray(pixels,create_pixel((rectangle->point->x) + (rectangle->height) - 1,
-                                                  (rectangle->point->y) + i));
+        addCellOfPixelInArray(pixels, createPixel(rectangle->point->x, (rectangle->point->y) + i));
+        addCellOfPixelInArray(pixels,
+                              createPixel((rectangle->point->x) + (rectangle->height) - 1, (rectangle->point->y) + i));
     }
     for (int i = 0; i < rectangle->height; ++i) {
-        addCellOfPixelInArray(pixels,create_pixel((rectangle->point->x) + i, (rectangle->point->y) + (rectangle->width) - 1));
-        addCellOfPixelInArray(pixels,create_pixel((rectangle->point->x) + i, rectangle->point->y));
+        addCellOfPixelInArray(pixels,
+                              createPixel((rectangle->point->x) + i, (rectangle->point->y) + (rectangle->width) - 1));
+        addCellOfPixelInArray(pixels, createPixel((rectangle->point->x) + i, rectangle->point->y));
     }
 }
 
-void pixel_polygon(Polygon *polygon, CellOfPixels **pixels) {
+void pixelPolygon(Polygon *polygon, CellOfPixels **pixels) {
+    // Convertit un polygone en pixels et les ajoute à un tableau de pixels
     for (int i = 0; i < polygon->n; ++i) {
         if (i == (polygon->n) - 1) {
-            Line *line = create_line(create_point(polygon->points[i]->x, polygon->points[i]->y), create_point(polygon->points[0]->x, polygon->points[0]->y));
-            pixel_line(line, pixels);
-            delete_line(line);
+            Line *line = createLine(createPoint(polygon->points[i]->x, polygon->points[i]->y),
+                                    createPoint(polygon->points[0]->x, polygon->points[0]->y));
+            pixelLine(line, pixels);
+            deleteLine(line);
         } else {
-            Line *line = create_line(create_point(polygon->points[i]->x, polygon->points[i]->y), create_point(polygon->points[i+1]->x, polygon->points[i+1]->y));
-            pixel_line(line, pixels);
-            delete_line(line);
+            Line *line = createLine(createPoint(polygon->points[i]->x, polygon->points[i]->y),
+                                    createPoint(polygon->points[i + 1]->x, polygon->points[i + 1]->y));
+            pixelLine(line, pixels);
+            deleteLine(line);
         }
     }
 }
 
-CellOfPixels *create_shape_to_pixel(Shape* shape){
+// Convertit une forme en pixels en fonction de son type et renvoie une liste chaînée de pixels
+CellOfPixels *createShapeToPixel(Shape* shape){
     CellOfPixels* pixels = NULL;
+
+    // Sélectionne le type de forme et appelle la fonction correspondante pour convertir la forme en pixels
     switch (shape->type) {
         case cmdLine:
-            pixel_line((Line*)(shape->realForm), &pixels);
+            pixelLine((Line *) (shape->realForm), &pixels);  // Convertit une ligne en pixels
             break;
         case cmdPoint:
-            pixel_point((Point*)(shape->realForm), &pixels);
+            pixelPoint((Point *) (shape->realForm), &pixels);  // Convertit un point en pixels
             break;
         case cmdCircle:
-            pixel_circle((Circle *)(shape->realForm), &pixels);
+            pixelCircle((Circle *) (shape->realForm), &pixels);  // Convertit un cercle en pixels
             break;
         case cmdPolygon:
-            pixel_polygon((Polygon *)(shape->realForm), &pixels);
+            pixelPolygon((Polygon *) (shape->realForm), &pixels);  // Convertit un polygone en pixels
             break;
         case cmdRectangle:
-            pixel_rectangle((Rectangle *)(shape->realForm), &pixels);
+            pixelRectangle((Rectangle *) (shape->realForm), &pixels);  // Convertit un rectangle en pixels
             break;
         case cmdSquare:
-            pixel_square((Square *)(shape->realForm), &pixels);
+            pixelSquare((Square *) (shape->realForm), &pixels);  // Convertit un carré en pixels
             break;
         default:
             break;
     }
-    return pixels;
+
+    return pixels;  // Retourne la liste chaînée de pixels
 }
 
+
+// Crée et retourne une nouvelle cellule de pixels à partir d'un pointeur vers un pixel
 CellOfPixels *createCellOfPixels(Pixel *pixel) {
     CellOfPixels *cell = (CellOfPixels *) malloc(sizeof(CellOfPixels));
     cell->pixel = pixel;
@@ -151,49 +169,65 @@ CellOfPixels *createCellOfPixels(Pixel *pixel) {
     return cell;
 }
 
+// Ajoute une cellule de pixels à un tableau de pixels
 void addCellOfPixelInArray(CellOfPixels **Array, Pixel *pixel) {
     if (*Array == NULL) {
+        // Si le tableau est vide, crée une nouvelle cellule et l'assigne au tableau
         *Array = createCellOfPixels(pixel);
     } else {
+        // Si le tableau n'est pas vide, crée une nouvelle cellule et met à jour les pointeurs
         CellOfPixels *newCell = createCellOfPixels(pixel);
         newCell->next = *Array;
         *Array = newCell;
     }
 }
 
-void delete_pixel_shape(CellOfPixels *pixels){
+// Supprime récursivement toutes les cellules de pixels dans une liste chaînée
+void deletePixelShape(CellOfPixels *pixels){
     if(pixels != NULL){
-        delete_pixel_shape(pixels->next);
-        delete_pixel(pixels->pixel);
+        // Appelle la fonction récursivement pour supprimer les cellules restantes
+        deletePixelShape(pixels->next);
+        // Supprime le pixel contenu dans la cellule et libère la mémoire de la cellule
+        deletePixel(pixels->pixel);
         free(pixels);
         pixels = NULL;
     }
 }
 
+// Calcule la longueur de la liste chaînée de pixels
 int lenOfLLCPixels(CellOfPixels* pixels){
     if(pixels != NULL){
+        // Appelle récursivement la fonction en ajoutant 1 à la longueur pour chaque cellule restante
         return 1 + lenOfLLCPixels(pixels->next);
     }else{
-        return 0;
+        return 0; // Retourne 0 lorsque la liste est vide
     }
 }
 
-void addLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix){
+// Ajoute les pixels d'une liste chaînée dans une matrice d'entiers
+void addLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix, unsigned int width, unsigned int height){
     CellOfPixels *temp = pixels;
-    for (int i = 0; temp != NULL; i++) {
+    while (temp != NULL) {
+        // Récupère les coordonnées du pixel et met à jour la valeur correspondante dans la matrice
         Pixel *p = temp->pixel;
-        matrix[p->y][p->x]++;
+        if((p->y < width) && (p->y >= 0) && (p->x < height) && (p->x >= 0)){
+            matrix[p->y][p->x]++;
+        }
         temp = temp->next;
     }
-    delete_pixel_shape(pixels);
+    // Supprime la liste chaînée après avoir mis à jour la matrice
+    deletePixelShape(pixels);
 }
 
+// Supprime les pixels d'une liste chaînée d'une matrice d'entiers
 void removeLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix){
     CellOfPixels *temp = pixels;
-    for (int i = 0; temp != NULL; i++) {
+    while (temp != NULL) {
+        // Récupère les coordonnées du pixel et met à jour la valeur correspondante dans la matrice
         Pixel *p = temp->pixel;
         matrix[p->y][p->x]--;
         temp = temp->next;
     }
-    delete_pixel_shape(pixels);
+    // Supprime la liste chaînée après avoir mis à jour la matrice
+    deletePixelShape(pixels);
 }

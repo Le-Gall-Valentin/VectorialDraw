@@ -4,12 +4,8 @@
 
 #include "manageString.h"
 
-void deleteString(char* string){
-    free(string);
-    string = NULL;
-}
-
 unsigned int countStringArrayElements(const char *array, const char *delimiter) {
+    // Compte le nombre d'éléments dans un tableau de chaînes de caractères en utilisant un délimiteur
     unsigned int count = 1;
     size_t delimiterLength = strlen(delimiter);
     char const *temporary = array;
@@ -25,6 +21,7 @@ unsigned int countStringArrayElements(const char *array, const char *delimiter) 
 }
 
 void copySubString(char *destination, const char *source, size_t length) {
+    // Copie une sous-chaîne de caractères dans une autre chaîne de caractères
     for (int i = 0; i < length; i++) {
         destination[i] = source[i];
     }
@@ -32,6 +29,7 @@ void copySubString(char *destination, const char *source, size_t length) {
 }
 
 StringArray splitStringToArray(const char *stringToSplit, const char *delimiter) {
+    // Divise une chaîne de caractères en un tableau de chaînes de caractères en utilisant un délimiteur
     StringArray result;
     size_t delimiterLength = strlen(delimiter);
 
@@ -66,9 +64,13 @@ StringArray splitStringToArray(const char *stringToSplit, const char *delimiter)
 }
 
 int isDigit(char* string){
+    // Vérifie si une chaîne de caractères ne contient que des chiffres
     int digit = TRUE;
-    for(int i = 0; i < strlen(string); i++){
-        if((string[i] < 48) || (string[i] > 57)){
+    if(((string[0] < '0') || (string[0] > '9')) && (string[0] != '-')){
+        digit = FALSE;
+    }
+    for(int i = 1; i < strlen(string); i++){
+        if((string[i] < '0') || (string[i] > '9')){
             digit = FALSE;
         }
     }
@@ -76,6 +78,7 @@ int isDigit(char* string){
 }
 
 int convertStringToDigit(char* string) {
+    // Convertit une chaîne de caractères en entier
     if(isDigit(string)){
         return atoi(string);
     }

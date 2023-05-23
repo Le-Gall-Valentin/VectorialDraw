@@ -12,7 +12,6 @@
 
 void executeControl(StringArray command, Area *area, int* stats);
 void delete(unsigned int id, Area* area);
-void clear();
 void quit(int* stats);
 void list(CellOfForms *forms);
 void help();

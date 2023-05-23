@@ -3,18 +3,28 @@
 //
 
 #include "line.h"
-Line* create_line(Point *p1,Point *p2){
+
+Line* createLine(Point *p1, Point *p2){
+    // Alloue un espace mémoire pour une structure Line
     Line * line = (Line*)malloc(sizeof(Line));
+
     line->point1 = p1;
     line->point2 = p2;
+
     return line;
 }
-void delete_line(Line * line){
-    delete_point(line->point1);
-    delete_point(line->point2);
-    free(line);
-    line = NULL;
+
+void deleteLine(Line * Line){
+    // Supprime les points de la ligne
+    deletePoint(Line->point1);
+    deletePoint(Line->point2);
+
+    free(Line);
+    Line = NULL;
 }
-void print_line(Line * line){
-    printf("(Line) point : (%d, %d) | point : (%d, %d)", (line->point1)->x, (line->point1)->y, (line->point2)->x, (line->point2)->y);
+
+void printLine(Line * Line){
+    // Affiche les informations de la ligne (points)
+    printf("(Line) point : (%d, %d) | point : (%d, %d)", (Line->point1)->x, (Line->point1)->y, (Line->point2)->x, (Line->point2)->y);
 }
+

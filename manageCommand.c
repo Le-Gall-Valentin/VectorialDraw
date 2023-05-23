@@ -5,6 +5,7 @@
 #include "manageCommand.h"
 
 typeOfCommand returnTypeOfCommand(char* command){
+    // Détermine le type de commande en fonction de la chaîne de caractères
     if(strcmp(command, "clear") == 0){
         return cmdClear;
     }else if(strcmp(command, "exit") == 0){
@@ -37,6 +38,7 @@ typeOfCommand returnTypeOfCommand(char* command){
 }
 
 int checkArguments(StringArray command){
+    // Vérifie le nombre d'arguments attendus pour une commande donnée
     switch (returnTypeOfCommand(command.array[0])) {
         case cmdDelete:{
             if(command.size != 2){
@@ -73,6 +75,7 @@ int checkArguments(StringArray command){
 }
 
 int checkCommand(StringArray command){
+    // Vérifie la validité de la commande et de ses arguments
     if(returnTypeOfCommand(command.array[0]) == badCommand){
         return FALSE;
     }
@@ -84,6 +87,7 @@ int checkCommand(StringArray command){
 }
 
 int returnFormOrControl(StringArray command) {
+    // Détermine si la commande est une commande de forme ou de contrôle
     switch (returnTypeOfCommand(command.array[0])) {
         case cmdPolygon:
         case cmdLine:

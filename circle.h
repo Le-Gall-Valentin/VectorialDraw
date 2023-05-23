@@ -10,9 +10,9 @@ typedef struct{
     Point *center;
     int radius;
 }Circle;
-Circle *create_circle(Point * center, int radius);
-void delete_circle(Circle * circle);
-void print_circle(Circle * circle);
+Circle *createCircle(Point * center, int radius);
+void deleteCircle(Circle * circle);
+void printCircle(Circle * circle);
 
 
 

@@ -11,8 +11,8 @@ typedef struct{
     int width;
     int height;
 }Rectangle;
-Rectangle *create_rectangle(Point * point, int width, int height);
-void delete_rectangle(Rectangle * rectangle);
-void print_rectangle(Rectangle * rectangle);
+Rectangle *createRectangle(Point * point, int width, int height);
+void deleteRectangle(Rectangle * rectangle);
+void printRectangle(Rectangle * rectangle);
 
 #endif //VECT_RECTANGLE_H

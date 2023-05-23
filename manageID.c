@@ -5,6 +5,7 @@
 #include "manageID.h"
 
 Shape *getFormById(unsigned int id, CellOfForms* array){
+    // Recherche et renvoie la forme correspondant à l'identifiant donné dans le tableau de formes
     CellOfForms *temporaryArray = array;
     while (temporaryArray != NULL){
         if(temporaryArray->value->id == id){
@@ -16,6 +17,7 @@ Shape *getFormById(unsigned int id, CellOfForms* array){
 }
 
 CellOfForms *getShapeById(unsigned int id, CellOfForms* array){
+    // Recherche et renvoie la cellule de forme correspondant à l'identifiant donné dans le tableau de formes
     CellOfForms *temporaryArray = array;
     while (temporaryArray != NULL){
         if(temporaryArray->value->id == id){

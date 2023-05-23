@@ -12,8 +12,8 @@ typedef struct{
     int y;
 }Point;
 
-Point *create_point(int x, int y);
-void delete_point(Point *point);
-void print_point(Point *p);
+Point *createPoint(int x, int y);
+void deletePoint(Point *point);
+void printPoint(Point *p);
 
 #endif //VECT_POINT_H

@@ -3,20 +3,23 @@
 //
 
 #include "square.h"
-Square *create_square(Point * point, int length){
+
+// Crée un objet Square à partir d'un point et d'une longueur spécifiés
+Square *createSquare(Point *point, int length){
     Square *square = (Square*)malloc(sizeof(Square));
     square->length = length;
     square->point = point;
     return square;
 }
 
-
-void delete_square(Square * square){
-    delete_point(square->point);
+// Supprime un objet Square et libère la mémoire associée
+void deleteSquare(Square *square){
+    deletePoint(square->point);
     free(square);
     square = NULL;
 }
-void print_square(Square * square){
-    printf("(Square) point : (%d, %d) | length : %d",(square->point)->x,(square->point)->y, square->length);
 
+// Affiche les informations d'un objet Square
+void printSquare(Square *square){
+    printf("(Square) point : (%d, %d) | length : %d", (square->point)->x, (square->point)->y, square->length);
 }

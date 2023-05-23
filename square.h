@@ -10,9 +10,9 @@ typedef struct{
     Point *point;
     int length;
 }Square;
-Square *create_square(Point * point, int length);
-void delete_square(Square * square);
-void print_square(Square * square);
+Square *createSquare(Point * point, int length);
+void deleteSquare(Square * square);
+void printSquare(Square * square);
 
 
 #endif //VECT_SQUARE_H
