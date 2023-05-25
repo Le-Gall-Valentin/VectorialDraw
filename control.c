@@ -39,14 +39,19 @@ void list(CellOfForms *forms) {
 }
 
 void help() {
-    printf("Commandes disponibles :\n");
-    printf("(point, line,circle,square,rectangle, polygon) + points\n");
-    printf("erase \n");
-    printf("plot \n");
-    printf("clear \n");
-    printf("list \n");
-    printf("delete ID \n");
-    printf("exit \n");
+    printf("Available orders :\n\n");
+    printf("point x y\n");
+    printf("line x1 y1 x2 y2\n");
+    printf("circle x y rayon\n");
+    printf("square x y length\n");
+    printf("rectangle x y width height\n");
+    printf("polygon x1, y1, x(n), x(n+1)\n");
+    printf("erase (delete all forms)\n");
+    printf("plot (display forms)\n");
+    printf("clear (clear screen)\n");
+    printf("list (list of all forms + ID)\n");
+    printf("delete ID (delete 1 form with her id)\n");
+    printf("exit (quit)\n");
 }
 
 void executeControl(StringArray command, Area *area, int *end) {

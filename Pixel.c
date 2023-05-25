@@ -220,12 +220,14 @@ void addLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix, unsigned i
 }
 
 // Supprime les pixels d'une liste chaînée d'une matrice d'entiers
-void removeLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix){
+void removeLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix, unsigned int width, unsigned int height){
     CellOfPixels *temp = pixels;
     while (temp != NULL) {
         // Récupère les coordonnées du pixel et met à jour la valeur correspondante dans la matrice
         Pixel *p = temp->pixel;
-        matrix[p->y][p->x]--;
+        if((p->y < width) && (p->y >= 0) && (p->x < height) && (p->x >= 0)){
+            matrix[p->y][p->x]--;
+        }
         temp = temp->next;
     }
     // Supprime la liste chaînée après avoir mis à jour la matrice

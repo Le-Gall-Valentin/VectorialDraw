@@ -29,7 +29,7 @@ CellOfPixels *createShapeToPixel(Shape* shape);
 void deletePixelShape(CellOfPixels *pixels);
 int lenOfLLCPixels(CellOfPixels* pixels);
 void addLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix, unsigned int width, unsigned int height);
-void removeLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix);
+void removeLLCOfPixelsInMatrixOfInts(CellOfPixels* pixels, int** matrix, unsigned int width, unsigned int height);
 
 
 

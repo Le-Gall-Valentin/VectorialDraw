@@ -103,7 +103,7 @@ void printArea(Area *area) {
 
 void deleteFormInAreaMatrix(Area** area, CellOfForms* form){
     // Supprime les pixels de la forme de la matrice de l'aire
-    removeLLCOfPixelsInMatrixOfInts(createShapeToPixel(form->value), (*area)->matrix);
+    removeLLCOfPixelsInMatrixOfInts(createShapeToPixel(form->value), (*area)->matrix, (*area)->width, (*area)->height);
 
     // Décrémente le nombre de formes dans l'aire
     (*(area))->nbForms--;
